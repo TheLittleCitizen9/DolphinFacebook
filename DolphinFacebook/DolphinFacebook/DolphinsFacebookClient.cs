@@ -5,9 +5,14 @@ using MamaFacebook.Abstract;
 
 namespace DolphinFacebook
 {
-    public class DolphinsFacebookClient : IFacebookClient
+    public class DolphinsFacebookClient : IFacebookClient, IDisplay
     {
         public event Action<string> NewWallPost;
+
+        public void DisplayWallPost(string wallPost)
+        {
+            Console.WriteLine(wallPost);
+        }
 
         public void Subscribe(IFacebookClient publisher)
         {

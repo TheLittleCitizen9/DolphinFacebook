@@ -12,4 +12,20 @@ namespace DolphinFacebook
             Console.WriteLine(wallPost);
         }
     }
+
+    public class ConsoleDisplayer2 : IDisplay
+    {
+        public void DisplayWallPost(string wallPost)
+        {
+            Console.WriteLine($"{wallPost}, 2");
+        }
+    }
+
+    public class ConsoleDisplayer3 : IDisplay
+    {
+        public void DisplayWallPost(string wallPost)
+        {
+            Console.WriteLine($"{wallPost}, 3");
+        }
+    }
 }

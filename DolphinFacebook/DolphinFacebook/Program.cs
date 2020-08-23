@@ -9,10 +9,16 @@ namespace DolphinFacebook
         {
             FacebookClientFactory facebookClientFactory = new FacebookClientFactory();
             IDisplay display = new ConsoleDisplayer();
+            IDisplay display2 = new ConsoleDisplayer2();
+            IDisplay display3 = new ConsoleDisplayer3();
             IFacebookClient facebookClient = facebookClientFactory.CreateClient(display);
-            IFacebookClient facebookClient2 = facebookClientFactory.CreateClient(display);
-            facebookClient.Subscribe(facebookClient2);
+            IFacebookClient facebookClient2 = facebookClientFactory.CreateClient(display2);
+            IFacebookClient facebookClient3 = facebookClientFactory.CreateClient(display3);
+            facebookClient2.Subscribe(facebookClient);
+            facebookClient3.Subscribe(facebookClient);
             facebookClient.WriteNewWallPost("This is a post");
+            facebookClient2.Unsubscribe(facebookClient);
+            facebookClient.WriteNewWallPost("Hello");
         }
     }
 }

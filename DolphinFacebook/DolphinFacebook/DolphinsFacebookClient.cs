@@ -5,7 +5,7 @@ using MamaFacebook.Abstract;
 
 namespace DolphinFacebook
 {
-    public class DolphinsFacebookClient : IFacebookClient, IDisplay
+    public class DolphinsFacebookClient : IFacebookClient
     {
         public List<IFacebookClient> Subscribers;
         public event Action<string> NewWallPost;
@@ -15,27 +15,19 @@ namespace DolphinFacebook
             Subscribers = new List<IFacebookClient>();
         }
 
-        public void DisplayWallPost(string wallPost)
-        {
-            Console.WriteLine(wallPost);
-        }
-
         public void Subscribe(IFacebookClient publisher)
         {
-            NewWallPost += publisher.WriteNewWallPost;
+            publisher.NewWallPost += WriteNewWallPost;
         }
 
         public void Unsubscribe(IFacebookClient publisher)
         {
-            NewWallPost -= publisher.WriteNewWallPost;
+            publisher.NewWallPost -= WriteNewWallPost;
         }
 
         public void WriteNewWallPost(string wallPost)
         {
-            foreach (var subscriber in Subscribers)
-            {
-                NewWallPost.Invoke(wallPost);
-            }
+            NewWallPost?.Invoke(wallPost);
         }
     }
 }

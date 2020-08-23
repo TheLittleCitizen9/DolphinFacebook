@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MamaFacebook.Abstract;
+using System;
 
 namespace DolphinFacebook
 {
@@ -6,7 +7,12 @@ namespace DolphinFacebook
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            FacebookClientFactory facebookClientFactory = new FacebookClientFactory();
+            IDisplay display = new ConsoleDisplayer();
+            IFacebookClient facebookClient = facebookClientFactory.CreateClient(display);
+            IFacebookClient facebookClient2 = facebookClientFactory.CreateClient(display);
+            facebookClient.Subscribe(facebookClient2);
+            facebookClient.WriteNewWallPost("This is a post");
         }
     }
 }

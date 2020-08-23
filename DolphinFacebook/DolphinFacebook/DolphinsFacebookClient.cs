@@ -7,7 +7,13 @@ namespace DolphinFacebook
 {
     public class DolphinsFacebookClient : IFacebookClient, IDisplay
     {
+        public List<IFacebookClient> Subscribers;
         public event Action<string> NewWallPost;
+
+        public DolphinsFacebookClient()
+        {
+            Subscribers = new List<IFacebookClient>();
+        }
 
         public void DisplayWallPost(string wallPost)
         {
@@ -26,7 +32,10 @@ namespace DolphinFacebook
 
         public void WriteNewWallPost(string wallPost)
         {
-            throw new NotImplementedException();
+            foreach (var subscriber in Subscribers)
+            {
+                NewWallPost.Invoke(wallPost);
+            }
         }
     }
 }

@@ -9,9 +9,7 @@ namespace DolphinFacebook
     {
         public IFacebookClient CreateClient(IDisplay display)
         {
-            IFacebookClient facebookClient = new DolphinsFacebookClient();
-            facebookClient.NewWallPost += display.DisplayWallPost;
-            return facebookClient;
+            return new DolphinsFacebookClient(display);
         }
     }
 }

@@ -9,20 +9,22 @@ namespace DolphinFacebook
     {
         public List<IFacebookClient> Subscribers;
         public event Action<string> NewWallPost;
+        public IDisplay Display;
 
-        public DolphinsFacebookClient()
+        public DolphinsFacebookClient(IDisplay display)
         {
             Subscribers = new List<IFacebookClient>();
+            Display = display;
         }
 
         public void Subscribe(IFacebookClient publisher)
         {
-            publisher.NewWallPost += WriteNewWallPost;
+            publisher.NewWallPost += Display.DisplayWallPost;
         }
 
         public void Unsubscribe(IFacebookClient publisher)
         {
-            publisher.NewWallPost -= WriteNewWallPost;
+            publisher.NewWallPost -= Display.DisplayWallPost;
         }
 
         public void WriteNewWallPost(string wallPost)
